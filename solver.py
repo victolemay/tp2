@@ -1,5 +1,6 @@
 import amplpy
 import os
+import numpy as np
 
 ampl_env = amplpy.Environment()
 ampl = amplpy.AMPL(ampl_env)
@@ -10,6 +11,7 @@ model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industr
 ampl.read(os.path.join(model_dir, 'tp2_new.mod'))
 
 #importer les data
+
 
 ampl.solve()
 
