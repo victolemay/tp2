@@ -1,4 +1,5 @@
 import unittest
+import sys
 
 ##Tester si le code est correct
 
@@ -13,7 +14,7 @@ if __name__ == 'main':
 ##L'exécution de ce code affichera le résultat des tests exécutés. Si tous les tests réussissent, vous verrez "OK" à la fin de la sortie. 
 # Si des tests échouent, vous verrez des messages d'erreur décrivant ce qui a échoué.
 
-##Tester si le code est efficase
+##Tester si le code est efficace
 
 # verifier si le temps de résolution est résonable (en bas de 10s)
 
