@@ -2,22 +2,28 @@ import amplpy
 import os
 import numpy as np
 
-def solve_ampl():
+class Solver():
 
-    ampl_env = amplpy.Environment()
-    ampl = amplpy.AMPL(ampl_env)
-
-    ampl.setOption('solver', 'gurobi')
-
-    model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
-    ampl.read(os.path.join(model_dir, 'tp2_new.mod'))
-
-    #importer les data
+    def __init__(self):
+        pass
 
 
-    ampl.solve()
+    def solve_ampl():
 
-    print('Objective : {}'.format(ampl.getObjective('couttotal').value()))
-    solution = ampl.getVariable('NBUS').getValues()
-    print('Solution :\n' + str(solution))
+        ampl_env = amplpy.Environment()
+        ampl = amplpy.AMPL(ampl_env)
+
+        ampl.setOption('solver', 'gurobi')
+
+        model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
+        ampl.read(os.path.join(model_dir, 'tp2_new.mod'))
+
+        #importer les data
+
+
+        ampl.solve()
+
+        print('Objective : {}'.format(ampl.getObjective('couttotal').value()))
+        solution = ampl.getVariable('NBUS').getValues()
+        print('Solution :\n' + str(solution))
 
