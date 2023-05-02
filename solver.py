@@ -10,10 +10,9 @@ class Solver():
 
     def solve_ampl():"""
 
+
 ampl_env = amplpy.Environment()
 ampl = amplpy.AMPL(ampl_env)
-
-ampl.setOption('solver', 'gurobi')
 
 model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
 data1_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
