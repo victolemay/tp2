@@ -4,8 +4,11 @@ import numpy as np
 """""
 class Solver():
 
-    def __init__(self):
-        pass
+    def __init__(self, inst):
+        self.inst = inst
+
+    def __str__(self):
+        return str('Instance etudiee = ' + str(self.inst))
 
 
     def solve_ampl():"""
