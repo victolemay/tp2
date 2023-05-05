@@ -2,6 +2,7 @@ import amplpy
 import os
 import numpy as np
 
+
 class Solver():
 
     def __init__(self, inst = 'tp2_new_inst1.dat'):
@@ -13,8 +14,7 @@ class Solver():
 
     def solve_ampl(self):
 
-
-        ampl_env = amplpy.Environment()
+        ampl_env = amplpy.Environment('/Users/victorialemay/Desktop')
         ampl = amplpy.AMPL(ampl_env)
 
         model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
@@ -30,3 +30,4 @@ class Solver():
         solution = ampl.getVariable('NBUS').getValues()
         print('Solution :\n' + str(solution))
 
+Solver.solve_ampl('tp2_new_inst1.dat')
