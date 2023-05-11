@@ -5,7 +5,7 @@ import numpy as np
 
 class Solver():
 
-    def __init__(self, inst = 'tp2_new_inst1.dat'):
+    def __init__(self, inst):
         self.inst = inst
 
     def __str__(self):
@@ -14,15 +14,16 @@ class Solver():
 
     def solve_ampl(self):
 
-        ampl_env = amplpy.Environment('/Users/victorialemay/Desktop')
+        ampl_env = amplpy.Environment('/Users/victorialemay/Desktop/ampl_macos64_1')
         ampl = amplpy.AMPL(ampl_env)
 
         model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
         data1_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
         ampl.read(os.path.join(model_dir, 'tp2_new.mod'))
-        ampl.read(os.path.join(data1_dir, self.inst))
 
-#importer les data
+        #ampl.read(os.path.join(data1_dir, 'tp2_new_inst1.dat'))
+        ampl.readData(os.path.join(data1_dir, self.inst))
+
 
         ampl.solve()
 
@@ -30,4 +31,10 @@ class Solver():
         solution = ampl.getVariable('NBUS').getValues()
         print('Solution :\n' + str(solution))
 
-Solver.solve_ampl('tp2_new_inst1.dat')
+
+
+#MAIN
+solver = Solver('tp2_new_inst1.dat')
+solver.solve_ampl()
+
+
