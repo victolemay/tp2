@@ -3,6 +3,11 @@ import os
 import numpy as np
 from solver import Solver
 
+from amplpy import AMPL, add_to_path   
+
+add_to_path(r"/Users/rosaliedesmeules/Desktop/AMPLSIAD")
+ampl = AMPL()           
+
 class TestSolver(unittest.TestCase):
 
     def test_solve_ampl(self):
