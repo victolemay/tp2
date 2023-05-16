@@ -1,8 +1,6 @@
 import amplpy
 import os
-import numpy as np
 import minizinc
-import pandas as pd
 import enum
 
 class Solver_ampl():
