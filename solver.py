@@ -2,6 +2,7 @@ import amplpy
 import os
 import numpy as np
 import minizinc
+import pandas as pd
 
 class Solver_ampl():
 
@@ -44,15 +45,25 @@ class Solver_mz():
 
         solver = minizinc.Solver.lookup('gecode')
 
-        model_path = os.path.normpath('C:/equipe8_TP1/modelefinal.mzn')
+        model_path = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2/tp2.mzn')
         problem = minizinc.Model(model_path)
 
         # code
-        data_path = os.path.normpath('C:/equipe8_TP1/instance1final.dzn')
+        data_path = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
         #instance = minizinc.Instance(data_path)
 
         instance = minizinc.Instance(solver, problem)
+        instance['S'] = '{soir1, soir2, soir3, soir4, soir5, soir6, soir7, soir8, soir9, soir10, soir11}'
         
+        if self.inst == 'inst1_dzn':
+            instance['Z'] = '{zone1, zone2, zone3, zone4, zone5}'
+        
+        data_path_inst = os.path.join(data_path, self.ins)
+        
+        data = pd.read_csv(data_path_inst, delimiter='=', header=None, names=['param', 'value'])
+
+
+
 
         #instance = Instance(solver, problem)
         #instance['maxbus'] = 5000
