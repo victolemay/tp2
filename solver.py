@@ -55,9 +55,8 @@ class Solver_mz():
         data_path_inst = os.path.join(data_path, self.inst)
 
         instance = minizinc.Instance(solver, problem)
-        S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
-        instance['S'] = S
-        Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
+        #S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
+        #Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
         
         #if self.inst == 'inst1_dzn.txt':
             #Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
@@ -72,7 +71,16 @@ class Solver_mz():
                 param_value = param_value.strip(';')
                 param_value = param_value.strip(']')
 
-                if param_name == 'placedispo':
+                if param_name == 'S':
+                    S = param_value.replace('[', '').split(',')
+                    S = [(s.strip()) for s in S]
+                    S = enum.Enum('S', S)
+                elif param_name == 'Z':
+                    Z = param_value.replace('[', '').split(',')
+                    Z = [(z.strip()) for z in Z]
+                    Z = enum.Enum('Z', Z)
+
+                elif param_name == 'placedispo':
                     placedispo = int(param_value)
 
                 elif param_name == 'cfixe':
@@ -101,7 +109,8 @@ class Solver_mz():
                 elif param_name == 'distancet':
                     distancet = param_value.replace('[', '').split(',')
                     distancet = [float(d.strip()) for d in distancet]
-
+        
+        instance['S'] = S
         instance['Z'] = Z
         instance['placedispo'] = placedispo
         instance['cfixe'] = cfixe

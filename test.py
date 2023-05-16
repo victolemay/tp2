@@ -1,3 +1,4 @@
+import enum
 with open('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2/inst1.dzn.txt', 'r') as text_file:
     for line in text_file.readlines():
         line = line.strip()
@@ -11,6 +12,13 @@ with open('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/
             placedispo = param_value
             print(placedispo)
         
+        elif param_name == 'Z':
+            Z = param_value.replace('[', '').split(',')
+            Z = [(z.strip()) for z in Z]
+            Z = enum.Enum('Z', Z)
+            print(Z)
+
+    
         elif param_name == 'pers':
             pers = param_value.replace('[', '').split(',')
             pers = [int(p.strip()) for p in pers]
