@@ -1,5 +1,5 @@
-from solver import Solver
+from solver import Solver_ampl
 
 
-solver = Solver('tp2_new_inst1.dat')
+solver = Solver_ampl('tp2_new_inst1.dat')
 solver.solve_ampl()
