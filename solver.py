@@ -50,8 +50,10 @@ class Solver_mz():
         model_path = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2/tp2.mzn')
         problem = minizinc.Model(model_path)
 
-        #création des data
+        #création des data        
         data_path = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
+        data_path_inst = os.path.join(data_path, self.inst)
+
         instance = minizinc.Instance(solver, problem)
         S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
         instance['S'] = S
@@ -60,7 +62,29 @@ class Solver_mz():
             Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
             instance['Z'] = Z
         
-        data_path_inst = os.path.join(data_path, self.inst)
+        with open(data_path_inst, 'r') as text_file:
+            for line in text_file.readlines():
+                line = line.strip()
+                param_name, param_value = line.split('=')
+
+                param_name = param_name.strip()
+                param_value = param_value.strip(';')
+
+
+
+
+
+
+
+        instance = minizinc.Instance(solver, problem)
+        S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
+        instance['S'] = S
+        
+        if self.inst == 'inst1_dzn':
+            Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
+            instance['Z'] = Z
+        
+        
         
         data = pd.read_csv(data_path_inst, delimiter='=', header=None, names=['param', 'value'])
 
