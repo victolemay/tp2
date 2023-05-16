@@ -5,15 +5,16 @@ with open('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/
 
         param_name = param_name.strip()
         param_value = param_value.strip(';')
+        param_value = param_value.strip(']')
 
         if param_name == 'placedispo':
             placedispo = param_value
             print(placedispo)
-
-        if param_name == 'pers':
-            pers = param_value
+        
+        elif param_name == 'pers':
+            pers = param_value.replace('[', '').split(',')
+            pers = [int(p.strip()) for p in pers]
             print(pers)
-
 
         #print(line[0:-1])
 

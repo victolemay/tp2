@@ -57,10 +57,11 @@ class Solver_mz():
         instance = minizinc.Instance(solver, problem)
         S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
         instance['S'] = S
+        Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
         
-        if self.inst == 'inst1_dzn':
-            Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
-            instance['Z'] = Z
+        #if self.inst == 'inst1_dzn.txt':
+            #Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
+            
         
         with open(data_path_inst, 'r') as text_file:
             for line in text_file.readlines():
@@ -69,13 +70,55 @@ class Solver_mz():
 
                 param_name = param_name.strip()
                 param_value = param_value.strip(';')
+                param_value = param_value.strip(']')
+
+                if param_name == 'placedispo':
+                    placedispo = int(param_value)
+
+                elif param_name == 'cfixe':
+                    cfixe = int(param_value)
+
+                elif param_name == 'salaire':
+                    salaire = float(param_value)
+
+                elif param_name == 'essence':
+                    essence = float(param_value)
+
+                elif param_name == 'vitbus':
+                    vitbus = float(param_value)
+
+                elif param_name == 'maxbus':
+                    maxbus = int(param_value)
+
+                elif param_name == 'pers':
+                    pers = param_value.replace('[', '').split(',')
+                    pers = [int(p.strip()) for p in pers]
+
+                elif param_name == 'pourcentage':
+                    pourcentage = param_value.replace('[', '').split(',')
+                    pourcentage = [float(p.strip()) for p in pourcentage]
+
+                elif param_name == 'distancet':
+                    distancet = param_value.replace('[', '').split(',')
+                    distancet = [float(d.strip()) for d in distancet]
+
+        instance['Z'] = Z
+        instance['placedispo'] = placedispo
+        instance['cfixe'] = cfixe
+        instance['salaire'] = salaire
+        instance['essence'] = essence
+        instance['vitbus'] = vitbus
+        instance['maxbus'] = maxbus
+        instance['pers'] = pers
+        instance['pourcentage'] = pourcentage
+        instance['distancet'] = distancet
 
 
+        result = instance.solve()
 
-
-
-
-
+        print('Objectif: ' + str(result['couttotal'])) 
+        print('Solution:\n' + str(result['NBUS']))
+""""
         instance = minizinc.Instance(solver, problem)
         S = enum.Enum('S', ['soir1', 'soir2', 'soir3', 'soir4', 'soir5', 'soir6', 'soir7', 'soir8', 'soir9', 'soir10', 'soir11'])
         instance['S'] = S
@@ -107,11 +150,8 @@ class Solver_mz():
         instance['pers'] = pers
         instance['pourcentage'] = pourcentage
         instance['distancet'] = distancet
+"""
 
-        result = instance.solve()
-
-        print('Objectif: ' + str(result['couttotal'])) 
-        print('Solution:\n' + str(result['NBUS']))
         
         #print(result.status)
         #print(result.statistics)
