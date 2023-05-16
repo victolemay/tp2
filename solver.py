@@ -49,7 +49,10 @@ class Solver_mz():
 
         # code
         data_path = os.path.normpath('C:/equipe8_TP1/instance1final.dzn')
-        instance = minizinc.Instance(data_path)
+        #instance = minizinc.Instance(data_path)
+
+        instance = minizinc.Instance(solver, problem)
+        
 
         #instance = Instance(solver, problem)
         #instance['maxbus'] = 5000
