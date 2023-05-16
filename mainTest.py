@@ -1,7 +1,7 @@
 import unittest
 import os
 import numpy as np
-from solver import Solver
+from solver import Solver_ampl
 #from amplpy import AMPL
 
 #add_to_path = (r'/Applications/ampl_macos643')
@@ -9,8 +9,9 @@ from solver import Solver
 
 class TestSolver(unittest.TestCase):
 
+
     def test_solve_ampl(self):
-        solver = Solver('tp2_new_inst1.dat')
+        solver = Solver_ampl('tp2_new_inst1.dat')
         solver.solve_ampl()
 
         # Vérifier que la solution obtenue est entière
