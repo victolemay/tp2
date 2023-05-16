@@ -2,11 +2,10 @@ import unittest
 import os
 import numpy as np
 from solver import Solver
+#from amplpy import AMPL
 
-from amplpy import AMPL, add_to_path   
-
-add_to_path(r"/Users/rosaliedesmeules/Desktop/AMPLSIAD")
-ampl = AMPL()           
+#add_to_path = (r'/Applications/ampl_macos643')
+#ampl = AMPL() 
 
 class TestSolver(unittest.TestCase):
 

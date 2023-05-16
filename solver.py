@@ -14,11 +14,11 @@ class Solver_ampl():
 
     def solve_ampl(self):
 
-        ampl_env = amplpy.Environment('/Users/victorialemay/Desktop/ampl_macos64_1')
+        ampl_env = amplpy.Environment('/Applications/ampl_macos643')
         ampl = amplpy.AMPL(ampl_env)
 
-        model_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
-        data1_dir = os.path.normpath('/Users/victorialemay/Documents/ecole/Genie_industriel/Session_6/SIAD/TP2')
+        model_dir = os.path.normpath('/Users/rosaliedesmeules/Desktop/AMPLSIAD')
+        data1_dir = os.path.normpath('/Users/rosaliedesmeules/Desktop/AMPLSIAD')
         ampl.read(os.path.join(model_dir, 'tp2_new.mod'))
 
         #ampl.read(os.path.join(data1_dir, 'tp2_new_inst1.dat'))
