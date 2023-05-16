@@ -38,27 +38,27 @@ class Solver_mz():
         self.inst = inst
 
     def __str__(self):
-    return str('Instance etudiee = ' + str(self.inst))
+        return str('Instance etudiee = ' + str(self.inst))
 
     def solve_mz(self):
 
-solver = minizinc.Solver.lookup('gecode')
+        solver = minizinc.Solver.lookup('gecode')
 
-model_path = os.path.normpath('C:/equipe8_TP1/modelefinal.mzn')
-problem = minizinc.Model(model_path)
+        model_path = os.path.normpath('C:/equipe8_TP1/modelefinal.mzn')
+        problem = minizinc.Model(model_path)
 
-# code
-data_path = os.path.normpath('C:/equipe8_TP1/instance1final.dzn')
-instance = minizinc.Instance(data_path)
+        # code
+        data_path = os.path.normpath('C:/equipe8_TP1/instance1final.dzn')
+        instance = minizinc.Instance(data_path)
 
-#instance = Instance(solver, problem)
-#instance['maxbus'] = 5000
+        #instance = Instance(solver, problem)
+        #instance['maxbus'] = 5000
 
-result = solver.solve_all(problem, instance)
+        result = solver.solve_all(problem, instance)
 
-print(result.status)
-print(result.statistics)
-if result.status is minizinc.Status.SATISFIED:
-    print(result['NBUS'])
-else:
-    print('Aucune solution trouvée')
+        print(result.status)
+        print(result.statistics)
+        if result.status is minizinc.Status.SATISFIED:
+            print(result['NBUS'])
+        else:
+            print('Aucune solution trouvée')
