@@ -118,7 +118,7 @@ class Solver_mz():
         result = instance.solve()
 
         print('Objectif: ' + str(result['couttotal'])) 
-        print('Solution:\n' + str(result['NBUS']))
+        #print('Solution:\n' + str(result['NBUS']))
 
         
         print(result.status)
