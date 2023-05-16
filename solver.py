@@ -60,7 +60,7 @@ class Solver_mz():
             Z = enum.Enum('Z', ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'])
             instance['Z'] = Z
         
-        data_path_inst = os.path.join(data_path, self.ins)
+        data_path_inst = os.path.join(data_path, self.inst)
         
         data = pd.read_csv(data_path_inst, delimiter='=', header=None, names=['param', 'value'])
 
@@ -84,11 +84,16 @@ class Solver_mz():
         instance['pourcentage'] = pourcentage
         instance['distancet'] = distancet
 
-        result = solver.solve_all(problem, instance)
+        result = instance.solve()
 
-        print(result.status)
-        print(result.statistics)
-        if result.status is minizinc.Status.SATISFIED:
-            print(result['NBUS'])
-        else:
-            print('Aucune solution trouvée')
+        print('Objectif: ' + str(result['couttotal'])) 
+        print('Solution:\n' + str(result['NBUS']))
+        
+        #print(result.status)
+        #print(result.statistics)
+        #if result.status is minizinc.Status.SATISFIED:
+            #print(result['NBUS'])
+        #else:
+            #print('Aucune solution trouvée')
+
+
