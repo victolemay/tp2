@@ -1,28 +1,61 @@
 import unittest
-import os
-import numpy as np
-from solver import Solver_ampl
-#from amplpy import AMPL
+from solver import Solver_ampl, Solver_mz
 
-#add_to_path = (r'/Applications/ampl_macos643')
-#ampl = AMPL() 
+class SolverComparisonTest(unittest.TestCase):
 
-class TestSolver(unittest.TestCase):
+    def test_solver_comparison_inst1(self):
+        ampl_solver = Solver_ampl('tp2_new_inst1.dat')
+        ampl_solution = ampl_solver.solve_ampl()
 
+        mz_solver = Solver_mz('inst1.dzn.txt')
+        mz_solution = mz_solver.solve_mz()
 
-    def test_solve_ampl(self):
-        solver = Solver_ampl('tp2_new_inst1.dat')
-        solver.solve_ampl()
+        # Comparaison des résultats
+        self.assertEqual(ampl_solution, mz_solution)
 
-        # Vérifier que la solution obtenue est entière
-        solution = solver.get_solution()
-        self.assertTrue(np.allclose(solution, np.round(solution)))
+        # Comparaison des temps d'exécution
+        temps_exec_ampl = ampl_solver.temps_exec_ampl
+        temps_exec_mz = mz_solver.temps_exec_mz
+        print("Temps d'exécution AMPL:", temps_exec_ampl)
+        print("Temps d'exécution MiniZinc:", temps_exec_mz)
+        
+        self.assertLess(temps_exec_ampl, temps_exec_mz)
 
-        # Vérifier que la solution est optimale
-        self.assertAlmostEqual(solver.get_objective(), 10510.0, places=1)
+    def test_solver_comparison_inst2(self):
+        ampl_solver = Solver_ampl('tp2_new_inst2.dat')
+        ampl_solution = ampl_solver.solve_ampl()
 
-        # Vérifier que le nombre de bus utilisés est inférieur ou égal à Maxbus
-        self.assertLessEqual(np.sum(solution), solver.get_max_bus())
+        mz_solver = Solver_mz('inst2.dzn.txt')
+        mz_solution = mz_solver.solve_mz()
+
+        # Comparaison des résultats
+        self.assertEqual(ampl_solution, mz_solution)
+
+        # Comparaison des temps d'exécution
+        temps_exec_ampl = ampl_solver.temps_exec_ampl
+        temps_exec_mz = mz_solver.temps_exec_mz
+        print("Temps d'exécution AMPL:", temps_exec_ampl)
+        print("Temps d'exécution MiniZinc:", temps_exec_mz)
+        
+        self.assertLess(temps_exec_ampl, temps_exec_mz)
+    
+    def test_solver_comparison_inst3(self):
+        ampl_solver = Solver_ampl('tp2_new_inst3.dat')
+        ampl_solution = ampl_solver.solve_ampl()
+
+        mz_solver = Solver_mz('inst3.dzn.txt')
+        mz_solution = mz_solver.solve_mz()
+
+        # Comparaison des résultats
+        self.assertEqual(ampl_solution, mz_solution)
+
+        # Comparaison des temps d'exécution
+        temps_exec_ampl = ampl_solver.temps_exec_ampl
+        temps_exec_mz = mz_solver.temps_exec_mz
+        print("Temps d'exécution AMPL:", temps_exec_ampl)
+        print("Temps d'exécution MiniZinc:", temps_exec_mz)
+        
+        self.assertLess(temps_exec_ampl, temps_exec_mz)
 
 if __name__ == '__main__':
     unittest.main()

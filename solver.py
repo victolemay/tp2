@@ -2,16 +2,19 @@ import amplpy
 import os
 import minizinc
 import enum
+import time
 
 class Solver_ampl():
 
     def __init__(self, inst):
         self.inst = inst
+        self.temps_exec_ampl = 0
 
     def __str__(self):
         return str('Instance etudiee = ' + str(self.inst))
 
     def solve_ampl(self):
+        start_time_ampl = time.time()
 
         ampl_env = amplpy.Environment('/Users/victorialemay/Desktop/ampl_macos64_1')
         ampl = amplpy.AMPL(ampl_env)
@@ -25,20 +28,28 @@ class Solver_ampl():
 
         ampl.solve()
 
+        self.temps_exec_ampl = time.time()-start_time_ampl
+
         print('Objective : {}'.format(ampl.getObjective('couttotal').value()))
         solution = ampl.getVariable('NBUS').getValues()
         print('Solution :\n' + str(solution))
 
+        print("Temps execution ampl:", self.temps_exec_ampl, "secondes")
+        sol = ampl.getObjective('couttotal').value()
+
+        
 
 class Solver_mz():
 
     def __init__(self, inst):
         self.inst = inst
+        self.temps_exec_mz = 0
 
     def __str__(self):
         return str('Instance etudiee = ' + str(self.inst))
 
     def solve_mz(self):
+        start_time_mz = time.time()
 
         solver = minizinc.Solver.lookup('gecode')
 
@@ -115,6 +126,9 @@ class Solver_mz():
 
         result = instance.solve()
 
+        self.temps_exec_mz = time.time()-start_time_mz
+        
+    
         print('Objectif: ' + str(result['couttotal'])) 
         #print('Solution:\n' + str(result['NBUS']))
 
@@ -125,5 +139,9 @@ class Solver_mz():
             print(result['NBUS'])
         else:
             print('Aucune solution trouvée')
+
+        print("Temps d'execution minizinc:", self.temps_exec_mz, "secondes")
+        
+        
 
 
